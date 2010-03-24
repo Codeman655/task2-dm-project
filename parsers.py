@@ -56,4 +56,9 @@ def parse_term(path):
 
 def parse_topics(path):
   fh = open(path, 'r')
-
+  topics = {}
+  i = 0
+  for line in fh.readlines():
+    tmp = line.strip().split()
+    topics[i] = tmp[2]
+  return topics
