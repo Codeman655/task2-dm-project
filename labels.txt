@@ -1,0 +1,43 @@
+Topic Id  Name                         Events (mostly derived from)
+--------  ----                         ----------------------------  
+   1      Tennessee Offensive Line     2141, 2152, 2089
+   2      Tennessee Defensive Line     2152
+   3      Tennessee Running Backs      2141, 2152, 2155, 2840, 2153, 2365, 2089
+   4      Tennessee Quarterbacks       2141, 2152, 2155, 2840, 2153, 2365
+   5      Tennessee Team               2141
+   6      Tennessee Defense            2141, 2152, 2840, 2153, 2365, 2385, 2089   
+   7      Tennessee Offense            2141, 2152, 2840, 2153, 2365, 2385, 2089
+   8      Tennessee Special Teams      2141, 2152, 2840
+   9      Tennessee Head Coach         2141, 2152, 2155, 2840, 2385
+  10      Tennessee Schedule           2152
+  11      Tennessee Players            2152, 2155, 2153, 2089
+  12      Tennessee Coaching Staff     2152, 2155, 2840, 2385, 2089
+  13      Tennessee Fans               2152, 2155, 2840, 2153, 2365
+  14      Tennessee Recruiting         2152, 2155, 2840, 2153, 2365
+  15      Tennessee Game Strategy      2152, 2155
+  16      Tennessee Former Coaches     2152, 2840
+  17      Tennessee Athletic Director  2152
+  18      Tennessee Expectations       2154
+  19      Tennessee Basketball         2154
+  20      Tennessee Wide Receivers     2155, 2153, 2365
+  21      Tennessee Football Records   2155, 2840
+  22      Tennessee Tight Ends         2155
+  23      Tennessee Former Players     2155
+  24      Tennessee Contributors       2155
+  25      Tennessee Penalties          2840
+  26      Tennessee Football Prospects 2153, 2365, 2089
+  27      Tennessee  vs. Florida       2153, 2365, 2385
+  28      UGA Quarterbacks             1765, 2153
+  29      UGA Football Records         2495
+  30      UGA Fans                     1765
+  31      UGA Offense                  2495
+  32      UGA Defense                  2495
+  33      UGA Coaching Staff           2495
+  34      UGA Football Prospects       2495
+  35      Atlanta Falcons Quarterbacks 1765, 2849
+  36      Atlanta Falcons Offense      1765
+  37      Atlanta Falcons Coaches      1765
+  38      Atlanta Falcons Players      2849
+  39      Atlanta Falcons Uniforms     2849
+  40      SEC Championship             2840
+  41      VHM/SportsTalk Program       2152, 2153, 2365
