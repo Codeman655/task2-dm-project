@@ -17,5 +17,3 @@ def parse_dict(path):
 
   return dict
 
-id = parse_dict("dictionary.txt")
-print id
