@@ -40,8 +40,8 @@ term_dict = parse_term(termfreq_path)
 # print "572 keys:", term_dict[572].keys()
 # print "796 hits:", term_dict[572][790]
 
-parse_dict(dict_path)
+print parse_dict(dict_path)
 
 matrix = create_matrix(questOD, term_dict)
 
-
+# print parse_topics(topics_path)
