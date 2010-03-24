@@ -29,17 +29,17 @@ def parse_quest(path):
   quest = {}
   questID={}
   questOD={}
-  for line in fh.readlines():
-    if i%3 == 0:
-      tmp = line.strip().split()
-      questID[tmp[3]] = "c" #Quest ID
-      questOD[i] = "c"    #Quest Order
-    if i%3 == 1:
-      questID[tmp[3]]=line.strip()
-      questOD[i]=line.strip()
-    i= i+1
-    return questID, questOD
-
+  line = fh.readline()
+  while (line != ''):
+    tmp = line.strip().split()
+    line2 = fh.readline()
+    tmp2 = line2.strip().split()
+    questID[tmp[3]] = tmp2
+    questOD[i] = tmp2
+    fh.readline()
+    line = fh.readline()
+    i += 1
+  return questID, questOD
 
 '''
 This parser returns 1 dictionary,
