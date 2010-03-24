@@ -13,7 +13,7 @@ def parse_dict(path):
   dict = {}
   for line in fh.readlines():
     tmp = line.strip().split()
-    dict[tmp[1]] = tmp[0]
+    dict[tmp[1]] = int(tmp[0])
   return dict
 
 '''
