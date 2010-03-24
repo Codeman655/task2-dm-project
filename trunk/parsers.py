@@ -60,5 +60,6 @@ def parse_topics(path):
   i = 0
   for line in fh.readlines():
     tmp = line.strip().split()
-    topics[i] = tmp[2]
+    topics[i] = tmp[-1]
+    i += 1
   return topics
