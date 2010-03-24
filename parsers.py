@@ -37,6 +37,7 @@ def parse_quest(path):
     if i%3 == 1:
       questID[tmp[3]]=line.strip()
       questOD[i]=line.strip()
+    i= i+1
     return questID, questOD
 
 
