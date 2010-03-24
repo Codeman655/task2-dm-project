@@ -9,10 +9,8 @@ import numpy
 
 #Probability generator
 #Cond probablitiy of term in the topic
-def probability(matrix, question){
+def probability(matrix, topics, question){
   for term in question:
-    term in the topic
 }
 
 #Cond probablitiy of the 
-
