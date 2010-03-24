@@ -24,4 +24,5 @@ print "dict file:", dict_path
 # Parse the files
 quest, quest_dict = parse_quest(questions_path)
 
-print quest_dict
+# print quest_dict
+print (parse_term(termfreq_path))['572']['786']
