@@ -8,6 +8,11 @@ import numpy
 #inverse document frequency
 
 #Probability generator
-def probability(
+#Cond probablitiy of term in the topic
+def probability(matrix, question){
+  for term in question:
+    term in the topic
+}
 
+#Cond probablitiy of the 
 
