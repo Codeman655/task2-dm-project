@@ -9,13 +9,12 @@ import sys,os
 This parser returns {Word number, word}
 '''
 def parse_dict(path):
-    fh = open(path,'r')
-    dict = {}
-    for line in fh.readlines():
-        tmp = line.strip().split()
-        dict[tmp[1]] = tmp[0]
-#dict[tmp[0]] = tmp[1]
-        return dict
+  fh = open(path,'r')
+  dict = {}
+  for line in fh.readlines():
+    tmp = line.strip().split()
+    dict[tmp[1]] = tmp[0]
+  return dict
 
 '''
 This parser returns 2 dictionaries,
@@ -51,7 +50,10 @@ def parse_term(path):
   termDict = {}
   for line in fh.readlines():
     tmp = line.strip().split()
-    termDict[tmp[0]] = dict([(tmp[i], int(tmp[i+1])) for i in range(len(tmp)-1)])
-#   termDict[tmp[0]] = tmp[1:]
+    termDict[int(tmp[0])] = dict([(int(tmp[i]), int(tmp[i+1])) for i in range(1,len(tmp)-1,2)])
   fh.close()
   return termDict
+
+def parse_topics(path):
+  fh = open(path, 'r')
+

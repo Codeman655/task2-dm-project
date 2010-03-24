@@ -2,9 +2,19 @@
 import sys
 from parsers import *
 
-if (len(sys.argv) > 6 or len(sys.argv) < 5):
+def create_matrix(questOD, term_dict):
+  rows = []
+  for q in questOD.keys():
+    cols = [0 for i in range(808)]
+    for key in term_dict[q].keys():
+      cols[key - 1] = term_dict[q][key]
+    rows.append(cols)
+  return rows
+
+
+if (len(sys.argv) != 6):
   print "Usage: ./bayesian.py <path_to_questions.txt> <path_to_termfreq.txt>\n\
-         <path_to_topics.txt> <path_to_test_questions.txt> [<path_to_dictionary.txt>]"
+         <path_to_topics.txt> <path_to_test_questions.txt> <path_to_dictionary.txt>"
   sys.exit()
 
 questions_path = sys.argv[1]
@@ -22,7 +32,16 @@ print "testquest file:", testquest_path
 print "dict file:", dict_path
 
 # Parse the files
-quest, quest_dict = parse_quest(questions_path)
+questID, questOD = parse_quest(questions_path)
 
 # print quest_dict
-print (parse_term(termfreq_path))['572']['786']
+term_dict = parse_term(termfreq_path)
+
+# print "572 keys:", term_dict[572].keys()
+# print "796 hits:", term_dict[572][790]
+
+parse_dict(dict_path)
+
+matrix = create_matrix(questOD, term_dict)
+
+
