@@ -25,8 +25,7 @@ questOD which is the { Order in the file, [list of words in the question] }
 '''
 def parse_quest(path):
   fh = open(path, 'r')
-  i=0
-  quest = {}
+  i=1
   questID={}
   questOD={}
   line = fh.readline()
@@ -39,6 +38,7 @@ def parse_quest(path):
     fh.readline()
     line = fh.readline()
     i += 1
+  fh.close()
   return questID, questOD
 
 '''
