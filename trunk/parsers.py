@@ -5,6 +5,21 @@ Parsers
 '''
 import sys,os
 
+
+'''
+This gets you the dictionary index given a word
+Returns:
+	index on success
+	-1 on failure
+'''
+def get_word_index(word, dict):
+  for key in dict.keys():
+    if word == dict[key]:
+      return key
+  return -1
+
+
+
 '''
 This parser returns {Word number, word}
 '''
