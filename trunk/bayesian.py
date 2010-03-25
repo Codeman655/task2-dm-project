@@ -1,6 +1,7 @@
 #!/usr/bin/python
 import sys
 from parsers import *
+from formulas import *
 
 def create_matrix(questOD, term_dict):
   rows = []
@@ -31,6 +32,7 @@ print "topics file:", topics_path
 print "testquest file:", testquest_path
 print "dict file:", dict_path
 
+
 # Parse the files
 questID, questOD = parse_quest(questions_path)
 
@@ -40,10 +42,13 @@ term_dict = parse_term(termfreq_path)
 # print "572 keys:", term_dict[572].keys()
 # print "796 hits:", term_dict[572][790]
 
-print get_word_index("thier", parse_dict(dict_path));
+print get_word_index("thier", parse_dict(dict_path))
 
-# print parse_dict(dict_path)
+dictionary = parse_dict(dict_path)
 
 matrix = create_matrix(questOD, term_dict)
+print matrix[0][207]
+topics = parse_topics(topics_path)
 
-# print parse_topics(topics_path)
+#testing probability
+probability(questOD.get(1), 0, matrix, 0, topics, dictionary)
