@@ -22,6 +22,7 @@ def get_word_index(word, dict):
 
 '''
 This parser returns {Word number, word}
+parses the dictionary
 '''
 def parse_dict(path):
   fh = open(path,'r')
@@ -32,10 +33,10 @@ def parse_dict(path):
   return dict
 
 '''
+Parses the question.txt
 This parser returns 2 dictionaries,
 questID which is the { Question Number, [list of words in question] }
 questOD which is the { Order in the file, [list of words in the question] }
-
 '''
 def parse_quest(path):
   fh = open(path, 'r')
