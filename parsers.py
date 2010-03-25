@@ -10,6 +10,7 @@ import sys,os
 This gets you the dictionary index given a word
 Returns:
 	index on success
+    when using this with the matrix it's matrix[quest][key1]
 	-1 on failure
 '''
 def get_word_index(word, dict):
