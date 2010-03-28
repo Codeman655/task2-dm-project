@@ -60,90 +60,81 @@ def topicProb(topicDict):
   return topic_calc
 
 #Returns a dictionary of 
-'''
-def TermClassProb(term_dict, topicDict){
-     tmpDict = {}
-     for question in term_dict.keys():
-
-    #This needs to be in a seperate function
-    qTopic = topicDict[qNum] #Grabbin' the topic
-    print "qTopic %d" % qTopic
-    tmpList = []
-    term_subtotal = 0
-    for tup in topicDict.iteritems():
-      if tup[1] == qTopic: #if the value == the topic of the question
-        print tup
-        tmpList.append(tup[0])
-    for tmp in tmpList:
-      term_subtotal += freqMatrix[tmp][tIndex-1] #Sum the frequencies
-    print term_subtotal
-
-    print "tIndex %d" % int(tIndex-1)
-    if len(freqMatrix[tIndex-1]) == 0:
-      print "error: len = 0, 1"
-      return -1
-
-    term_subtotal = float(term_subtotal) / len(freqMatrix[tIndex-1])  
-    
-'''
-
-def probability(quest, qNum, freqMatrix, tProb, topicDict, termDict):
+def Validator(questList, topic, tProbList, probDict):
+    factor = 1.0;
+    for term in questList:
+      factor *= probDict[topic][term]
+    return  factor * tProbList[topic] 
+      
+#quest is a lsit of words
+def probability(quest, topicDict, termDict):
   #def probability(quest, class_num, tProbList)
   #Use the term frequency matrix to generate a probability/topic dictionary
-
   tProbList = topicProb(topicDict)
-  quest = converter(quest, termDict)
+  probdict = prob_given(termDict, topicDict)
+  questList = converter(quest, termDict)
+  maxTopic = None
+  maxProb = float(0.0)
 
-  factor=[] 
-  for term in quest:
-    '''
-    print "Checking: " + term
-    #Goal=(frequency of terms in the topic)
-    if tIndex < 0:
-      continue
-    else:
-      fij = freqMatrix[qNum][tIndex-1] #frequency of the term in the question
-      print fij
-    '''
-    tIndex = get_word_index(term, termDict)
+  for i in range (1,42):
+    tmp = Validator(questList, i, tProbList, probdict)
+    if (tmp > maxProb):
+      maxProb = tmp
+      maxTopic = i
+      print "change"
+      print "maxProb: %f" % tmp
+      print "maxTopic: %d" % i
 
-    #This needs to be in a seperate function
-    qTopic = topicDict[qNum] #Grabbin' the topic
-    print "qTopic %d" % qTopic
-    tmpList = []
-    term_subtotal = 0
-    for tup in topicDict.iteritems():
-      if tup[1] == qTopic: #if the value == the topic of the question
-        print tup
-        tmpList.append(tup[0])
-    for tmp in tmpList:
-      term_subtotal += freqMatrix[tmp][tIndex-1] #Sum the frequencies
-    print term_subtotal
+  return maxTopic
 
-    print "tIndex %d" % int(tIndex-1)
-    if len(freqMatrix[tIndex-1]) == 0:
-      print "error: len = 0, 1"
-      return -1
 
-    term_subtotal = float(term_subtotal) / len(freqMatrix[tIndex-1])  
 
-    if tProbList[qNum+1] == 0:
-      print "qnum: "
-      print qNum
-      print tProbList
-      print "error: len = 0, 2"
-      return -1
-
-    term_subtotal /= tProbList[qNum+1] #This is P(term & topic) Need to check
-    print "P(Term in Topic):" 
-    print term_subtotal
-    factor.append(fij*term_subtotal)
-  
-  tmpNum = 1
-  for item in factor:
-    tmpNum *= item
-  tmpNum /= len(quest)
-  print "resulting probability: "
-  print tmpNum
-  return tmpNum #whatever this is
-
+#  factor=[] 
+#  for term in quest:
+#    print "Checking: " + term
+#    #Goal=(frequency of terms in the topic)
+#    if tIndex < 0:
+#      continue
+#    else:
+#      fij = freqMatrix[qNum][tIndex-1] #frequency of the term in the question
+#    tIndex = get_word_index(term, termDict)
+#
+#    #This needs to be in a seperate function
+#    qTopic = topicDict[qNum] #Grabbin' the topic
+#    print "qTopic %d" % qTopic
+#    tmpList = []
+#    term_subtotal = 0
+#    for tup in topicDict.iteritems():
+#      if tup[1] == qTopic: #if the value == the topic of the question
+#        print tup
+#        tmpList.append(tup[0])
+#    for tmp in tmpList:
+#      term_subtotal += freqMatrix[tmp][tIndex-1] #Sum the frequencies
+#    print term_subtotal
+#
+#    print "tIndex %d" % int(tIndex-1)
+#    if len(freqMatrix[tIndex-1]) == 0:
+#      print "error: len = 0, 1"
+#      return -1
+#
+#    term_subtotal = float(term_subtotal) / len(freqMatrix[tIndex-1])  
+#
+#    if tProbList[qNum+1] == 0:
+#      print "qnum: "
+#      print qNum
+#      print tProbList
+#      print "error: len = 0, 2"
+#      return -1
+#
+#    term_subtotal /= tProbList[qNum+1] #This is P(term & topic) Need to check
+#    print "P(Term in Topic):" 
+#    print term_subtotal
+#    factor.append(fij*term_subtotal)
+#  
+#  tmpNum = 1
+#  for item in factor:
+#    tmpNum *= item
+#  tmpNum /= len(quest)
+#  print "resulting probability: "
+#  print tmpNum
+#  return tmpNum #whatever this is
