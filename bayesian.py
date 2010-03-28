@@ -38,17 +38,18 @@ questID, questOD = parse_quest(questions_path)
 
 # print quest_dict
 term_dict = parse_term(termfreq_path)
+print term_dict.get(1)
 
 # print "572 keys:", term_dict[572].keys()
 # print "796 hits:", term_dict[572][790]
-
-print get_word_index("thier", parse_dict(dict_path))
-
-dictionary = parse_dict(dict_path)
-
-matrix = create_matrix(questOD, term_dict)
-print matrix[0][207]
-topics = parse_topics(topics_path)
-
-#testing probability
-probability(questOD.get(1), 0, matrix, 0, topics, dictionary)
+#
+#print get_word_index("thier", parse_dict(dict_path))
+#
+#dictionary = parse_dict(dict_path)
+#
+#matrix = create_matrix(questOD, term_dict)
+#print matrix[0][207]
+#topics = parse_topics(topics_path)
+#
+##testing probability
+#probability(questOD.get(2), 1, matrix, 0, topics, dictionary)
