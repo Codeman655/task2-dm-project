@@ -40,9 +40,9 @@ termDict = parse_term(termfreq_path)
 
 # print quest_dict
 term_dict = parse_term(termfreq_path)
-something = probability(questOD[10], topicDict, termDict)
+something = probability(questOD[22], topicDict, termDict)
 print "Max Topic %d for question: " % something
-print questOD[1]
+print questOD[10]
 
 # print "572 keys:", term_dict[572].keys()
 # print "796 hits:", term_dict[572][790]
