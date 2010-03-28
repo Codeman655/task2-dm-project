@@ -17,6 +17,27 @@ from parsers import *
 #tProb result of TopicProb[question_number]
 #topicDict = the Topic Dictionary
 
+def prob_given(termDict, topicDict):
+  probdict = {}
+  for qindex in termDict.keys():
+    myclass = topicDict[qindex-1]
+    if probdict.keys().count(myclass) == 0:
+      probdict[myclass] = {}
+    for term in termDict[qindex].keys():
+      if probdict[myclass].keys().count(term) == 0:
+        probdict[myclass][term] = 1.0
+      else:
+        probdict[myclass][term] += 1.0
+
+  for topic in probdict.keys():
+    sum = 0.0
+    for windex in probdict[topic].keys():
+      sum += probdict[topic][windex]
+    for windex in probdict[topic].keys():
+      probdict[topic][windex] /= sum
+
+  return probdict
+
 def converter(quest, termDict):
   blank_list = []
   for term in quest:
