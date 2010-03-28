@@ -78,6 +78,7 @@ def probability(quest, topicDict, termDict):
 
   for i in range (1,42):
     tmp = Validator(questList, i, tProbList, probdict)
+    print "tmp = %f" % tmp
     if (tmp > maxProb):
       maxProb = tmp
       maxTopic = i
