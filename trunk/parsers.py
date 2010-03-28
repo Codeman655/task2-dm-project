@@ -61,7 +61,6 @@ def parse_quest(path):
 This parser returns 1 dictionary,
 the termDict which is the { questOD_number, [word in the dictionary, the frequency]
 '''
-
 def parse_term(path):
   fh = open(path, 'r')
   termDict = {}
