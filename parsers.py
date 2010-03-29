@@ -31,6 +31,7 @@ def parse_dict(path):
   for line in fh.readlines():
     tmp = line.strip().split()
     dict[int(tmp[1])] = tmp[0]
+  fh.close()
   return dict
 
 '''
@@ -40,7 +41,11 @@ questID which is the { Question Number, [list of words in question] }
 questOD which is the { Order in the file, [list of words in the question] }
 '''
 def parse_quest(path):
-  fh = open(path, 'r')
+  try:
+    fh = open(path, 'r')
+  except IOError:
+    print "Error: unable to open '%s'." % path
+    sys.exit()
   i=1
   questID={}
   questOD={}
@@ -49,7 +54,7 @@ def parse_quest(path):
     tmp = line.strip().split()
     line2 = fh.readline()
     tmp2 = line2.strip().split()
-    questID[tmp[3]] = tmp2
+    questID[i] = int(tmp[3])
     questOD[i] = tmp2
     fh.readline()
     line = fh.readline()
@@ -72,10 +77,13 @@ def parse_term(path):
 
 def parse_topics(path):
   fh = open(path, 'r')
-  topics = {}
+  topicsOD = {}
+  topicsID = {}
   i = 0
   for line in fh.readlines():
     tmp = line.strip().split(',')
-    topics[i] = int(tmp[-1])
+    topicsOD[i] = int(tmp[-1])
+    topicsID[int(tmp[1])] = int(tmp[-1])
     i += 1
-  return topics
+  fh.close()
+  return topicsID, topicsOD

@@ -3,64 +3,57 @@ import sys
 from parsers import *
 from formulas import *
 
-def create_matrix(questOD, term_dict):
-  rows = []
-  for q in questOD.keys():
-    cols = [0 for i in range(808)]
-    for key in term_dict[q].keys():
-      cols[key - 1] = term_dict[q][key]
-    rows.append(cols)
-  return rows
-
-
+# Check for correct number of arguments
 if (len(sys.argv) != 6):
   print "Usage: ./bayesian.py <path_to_questions.txt> <path_to_termfreq.txt>\n\
          <path_to_topics.txt> <path_to_test_questions.txt> <path_to_dictionary.txt>"
   sys.exit()
 
+# Get the paths for the different arguments
 questions_path = sys.argv[1]
 termfreq_path = sys.argv[2]
 topics_path = sys.argv[3]
 testquest_path = sys.argv[4]
-dict_path = None
-if (len(sys.argv) == 6):
-  dict_path = sys.argv[5]
-
-print "questions file:", questions_path
-print "termfreq file:", termfreq_path
-print "topics file:", topics_path
-print "testquest file:", testquest_path
-print "dict file:", dict_path
-
+dict_path = sys.argv[5]
 
 # Parse the files
 questID, questOD = parse_quest(questions_path)
-topicDict = parse_topics(topics_path)
+topicDictID, topicDictOD = parse_topics(topics_path)
 termFreqDict = parse_term(termfreq_path)
 dictionary = parse_dict(dict_path)
 
-#print "probability given:"
-#for i in range(1, 41):
-#	print "topic %d: %d" % (i, len(prob_given(termDict, topicDict)[i].keys()))
+# Do some preliminary probability
+topicProbList = topicProb(topicDictOD)
+probDict = prob_given(termFreqDict, topicDictOD)
 
-# print quest_dict
-#for i in range(1,50):
-i = 2
-print questOD[i]
-something = probability(questOD[i], topicDict, termFreqDict, dictionary)
-print "Max Topic for question: %d" % something
-#  print questOD[i]
+# Parse and classify the test questions
+testQuestID, testQuestOD = parse_quest(testquest_path)
 
-# print "572 keys:", term_dict[572].keys()
-# print "796 hits:", term_dict[572][790]
-#
-#print get_word_index("thier", parse_dict(dict_path))
-#
-#dictionary = parse_dict(dict_path)
-#
-#matrix = create_matrix(questOD, term_dict)
-#print matrix[0][207]
-#topics = parse_topics(topics_path)
-#
-##testing probability
-#probability(questOD.get(2), 1, matrix, 0, topics, dictionary)
+right = 0.0
+wrong = 0.0
+c_matrix = dict([(i, dict([(j, 0) for j in range(1,42)])) for i in range(1,42)])
+
+for qkey in testQuestOD.keys():
+  qID = testQuestID[qkey]
+  guess = probability(testQuestOD[qkey], topicProbList, probDict, dictionary)
+  actual = topicDictID[qID]
+  c_matrix[guess][actual] += 1
+  if guess == actual:
+    right += 1.0
+  else :
+    wrong += 1.0
+
+# Print the confusion matrix and the accuracy
+print "\n%110s" % "Confusion Matrix ( row = predicted, column = actual )"
+print "\033[47m\033[30m\033[1m   ",
+for i in range(1, 42):
+  print "%3d" % i,
+print "\033[0m"
+for guess in c_matrix.keys():
+  print "\033[47m\033[30m\033[1m%3d\033[0m" % guess,
+  for actual in c_matrix[guess].keys():
+    print "%3d" % c_matrix[guess][actual],
+  print ''
+
+
+print "\nAccuracy: %.3f%%" % (right / (right + wrong) * 100),
