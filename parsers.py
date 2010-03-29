@@ -69,9 +69,12 @@ the termDict which is the { questOD_number, [word in the dictionary, the frequen
 def parse_term(path):
   fh = open(path, 'r')
   termDict = {}
+  key = 1
   for line in fh.readlines():
     tmp = line.strip().split()
-    termDict[int(tmp[0])] = dict([(int(tmp[i]), int(tmp[i+1])) for i in range(1,len(tmp)-1,2)])
+#   termDict[int(tmp[0])] = dict([(int(tmp[i]), int(tmp[i+1])) for i in range(1,len(tmp)-1,2)])
+    termDict[key] = dict([(int(tmp[i]), int(tmp[i+1])) for i in range(1,len(tmp)-1,2)])
+    key += 1
   fh.close()
   return termDict
 

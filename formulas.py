@@ -1,21 +1,19 @@
 #!/usr/bin/python
 
-import sys, os
+import sys, os, random
 from parsers import *
 
 #inverse term frequency
 
 #inverse document frequency
 
-#How to use this:
-#quest = list of words in the question
-#topicDict = the Topic Dictionary
-
 # Calculate the probability of a term given a topic
-def prob_given(termFreqDict, topicDict):
+def prob_given(termFreqDict, topicDictID, questID):
   probdict = {}
   for qindex in termFreqDict.keys():
-    myclass = topicDict[qindex-1]
+    if questID.keys().count(qindex) == 0:
+      continue
+    myclass = topicDictID[questID[qindex]]
     if probdict.keys().count(myclass) == 0:
       probdict[myclass] = {}
     for term in termFreqDict[qindex].keys():
@@ -42,14 +40,14 @@ def converter(term_list, dictionary):
   return blank_list
 
 # Calculate the probability of the topics
-def topicProb(topicDict):
+def topicProb(topicDictID, questID):
   topic_calc = []
   topic_calc.append(0)
   for i in range(1,42):
-    count = 0
-    for topic in topicDict.itervalues():
-      if topic == i:
-        count += 1
+    count = 0.0
+    for qid in questID.values():
+      if topicDictID[qid] == i:
+        count += 1.0
     topic_calc.append(count/41.0)
   return topic_calc
 
@@ -66,6 +64,8 @@ def topic_quest_prob(termList, topic, tProbList, probDict):
 # and return the topic with the highest probability
 def probability(questList, topicProbList, probDict, dictionary):
   termList = converter(questList, dictionary)
+# random.seed()
+# maxTopic = random.randrange(1,42,1)
   maxTopic = None
   maxProb = float(0.0)
 
