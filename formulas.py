@@ -38,10 +38,10 @@ def prob_given(termDict, topicDict):
 
   return probdict
 
-def converter(quest, termDict):
+def converter(quest, dictionary):
   blank_list = []
   for term in quest:
-    tmp = get_word_index(term, termDict)
+    tmp = get_word_index(term, dictionary)
     if tmp < 0:
       continue
     blank_list.append(tmp)
@@ -63,29 +63,27 @@ def topicProb(topicDict):
 def Validator(questList, topic, tProbList, probDict):
     factor = 1.0;
     for term in questList:
+      if probDict[topic].keys().count(term) == 0:
+        return 0.0
       factor *= probDict[topic][term]
     return  factor * tProbList[topic] 
       
 #quest is a lsit of words
-def probability(quest, topicDict, termDict):
+def probability(quest, topicDict, termFreqDict, dictionary):
   #def probability(quest, class_num, tProbList)
   #Use the term frequency matrix to generate a probability/topic dictionary
   tProbList = topicProb(topicDict)
-  probdict = prob_given(termDict, topicDict)
-  questList = converter(quest, termDict)
+  probdict = prob_given(termFreqDict, topicDict)
+  questList = converter(quest, dictionary)
   maxTopic = None
   maxProb = float(0.0)
 
   for i in range (1,42):
     tmp = Validator(questList, i, tProbList, probdict)
-    print "tmp = %f" % tmp
     if (tmp > maxProb):
       maxProb = tmp
       maxTopic = i
-      print "change"
-      print "maxProb: %f" % tmp
-      print "maxTopic: %d" % i
-
+  print "maxProb:", maxProb
   return maxTopic
 
 

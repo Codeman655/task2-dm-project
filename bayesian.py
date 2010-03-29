@@ -36,13 +36,20 @@ print "dict file:", dict_path
 # Parse the files
 questID, questOD = parse_quest(questions_path)
 topicDict = parse_topics(topics_path)
-termDict = parse_term(termfreq_path)
+termFreqDict = parse_term(termfreq_path)
+dictionary = parse_dict(dict_path)
+
+#print "probability given:"
+#for i in range(1, 41):
+#	print "topic %d: %d" % (i, len(prob_given(termDict, topicDict)[i].keys()))
 
 # print quest_dict
-term_dict = parse_term(termfreq_path)
-something = probability(questOD[22], topicDict, termDict)
-print "Max Topic %d for question: " % something
-print questOD[10]
+#for i in range(1,50):
+i = 2
+print questOD[i]
+something = probability(questOD[i], topicDict, termFreqDict, dictionary)
+print "Max Topic for question: %d" % something
+#  print questOD[i]
 
 # print "572 keys:", term_dict[572].keys()
 # print "796 hits:", term_dict[572][790]
