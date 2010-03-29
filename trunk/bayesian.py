@@ -23,8 +23,8 @@ termFreqDict = parse_term(termfreq_path)
 dictionary = parse_dict(dict_path)
 
 # Do some preliminary probability
-topicProbList = topicProb(topicDictOD)
-probDict = prob_given(termFreqDict, topicDictOD)
+topicProbList = topicProb(topicDictID, questID)
+probDict = prob_given(termFreqDict, topicDictID, questID)
 
 # Parse and classify the test questions
 testQuestID, testQuestOD = parse_quest(testquest_path)

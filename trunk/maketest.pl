@@ -3,7 +3,7 @@ use warnings;
 use strict;
 
 if ($#ARGV != 2) {
-	die "Usage: ./maketest threshold=[0-1] questions.txt topics.txt\n";
+	die "Usage: ./maketest threshold=[0-1] questions.txt termfreq.txt\n";
 }
 
 srand(time());
@@ -15,7 +15,7 @@ open TFH, "<".$ARGV[2];
 
 open QtestFH, ">questions_test.txt";
 open QtrainFH, ">questions_train.txt";
-open TtrainFH, ">topics_train.txt";
+open TtrainFH, ">termfreq_train.txt";
 
 # For each line in the topics file
 while (<TFH>) {
