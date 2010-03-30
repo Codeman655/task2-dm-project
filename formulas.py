@@ -27,14 +27,14 @@ def prob_given(termFreqDict, topicDictID, questID):
       sum += probdict[topic][windex]
     for windex in probdict[topic].keys():
       probdict[topic][windex] /= sum
-  return probdict
+  return probdict #Probability of term(values), in topic(key)
 
 # Convert a list of words into a list of valid term indexes
 def converter(term_list, dictionary):
   blank_list = []
   for term in term_list:
     tmp = get_word_index(term, dictionary)
-    if tmp < 0:
+    if tmp < 0: #word isn't found in the dictionary
       continue
     blank_list.append(tmp)
   return blank_list
@@ -54,9 +54,11 @@ def topicProb(topicDictID, questID):
 # Returns the probability of class given a question
 def topic_quest_prob(termList, topic, tProbList, probDict):
     factor = 1.0;
-    for term in termList:
+    for term in termList: #fill in the holes?
+      if topic not in probDict.keys(): #covered the key index issue
+        probDict[topic]={}
       if probDict[topic].keys().count(term) == 0:
-        return 0.0
+        return 0.0 #Problem here
       factor *= probDict[topic][term]
     return  factor * tProbList[topic] 
       
@@ -64,9 +66,9 @@ def topic_quest_prob(termList, topic, tProbList, probDict):
 # and return the topic with the highest probability
 def probability(questList, topicProbList, probDict, dictionary):
   termList = converter(questList, dictionary)
-# random.seed()
-# maxTopic = random.randrange(1,42,1)
-  maxTopic = None
+  random.seed()
+  maxTopic = random.randrange(1,42,1)
+# maxTopic = None
   maxProb = float(0.0)
 
   for i in range (1,42):
